@@ -1,0 +1,7 @@
+{
+  "name": "Commentaire",
+  "short_name": "Commentaire",
+  "description": "A comment section",
+  "start_url": "/",
+  "display": "standalone"
+}

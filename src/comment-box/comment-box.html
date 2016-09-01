@@ -1,0 +1,61 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="my-comment.html">
+
+<dom-module id="comment-box">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      
+
+      my-comment {
+        margin-bottom: 25px;
+      }
+    </style>
+    
+    
+    <iron-ajax url="/comments" handle-as="json" last-response="{{allComments}}" method="GET" id="getcomments" on-response="prettifyDate"></iron-ajax>
+    <template is='dom-repeat' items="{{allComments}}">
+      <my-comment commentaire="{{item}}"></my-comment>
+    </template>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'comment-box',
+
+      properties: {
+        
+        allComments: {
+          type: Array,
+          value: []
+        }
+      },
+
+      ready: function(){
+        this.$.getcomments.generateRequest();
+      },
+
+      prettifyDate : function() {
+        for(var i = 0; i < this.allComments.length; i++) {
+          if(this.allComments[i]){
+            var d = new Date(this.allComments[i].heure);
+            this.allComments[i].prettyDate = d.toLocaleDateString();
+            this.allComments[i].prettyTime = d.toLocaleTimeString();
+
+          }
+        }
+      }
+
+      
+
+
+    });
+  </script>
+</dom-module>
+  

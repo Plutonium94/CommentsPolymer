@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<dom-module id="comment">
+	<template>
+		<style>
+			:host  {
+				background-color: #77ff33;
+			}
+		</style>
+		<p>{{item.commentaire}} par {{item.auteur}} à {{item.prettyDate}}</p>
+        <paper-icon-button>{{item.likes}} J'aime</paper-icon-button>        
+        <paper-icon-button>{{item.dislikes}} Je n'aime plus</paper-icon-button>
+
+	</template>
+
+	<script>
+
+
+		Polymer({
+
+			is: 'comment',
+			properties: {
+				commentaire : {
+					type: Object,
+					value: {}
+				},
+			}
+
+		});
+	</script>
+
+</dom-module>

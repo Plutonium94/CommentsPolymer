@@ -1,0 +1,39 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="comment-write">
+	<style>
+		:host {
+			display: block;
+		}
+
+		paper-button {
+			background-color: rgb(246,247,247);
+		}
+	</style>
+	<template>
+	
+		<form is="iron-form" id="writeCommentForm" method="post" action="/write" content-type="application/json" >
+			<paper-textarea placeholder="Ecrivez votre commentaire ici ..." name="commentaire" rows="7"></paper-textarea>
+			<paper-input type="text" placeholder="Votre nom" name="nom"></paper-input>
+			<paper-button raised onclick="writeComment()">&Eacute;crire</paper-button>
+		</form>
+	</template>
+
+	<script>
+
+		Polymer({
+			is: 'comment-write',
+			properties: {},
+
+			writeComment : function() {
+				this.submit();
+			}
+		});
+
+	</script>
+
+</dom-module>

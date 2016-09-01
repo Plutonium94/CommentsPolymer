@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+
+<dom-module id="comment">
+	<template>
+		<style>
+			:host  {
+				background-color: #77ff33;
+			}
+
+		</style>
+		<paper-card heading="{{item.auteur}} à {{item.prettyDate}}">
+			<div class="card-content">{{item.commentaire}}</div>
+        	<paper-icon-button>{{item.likes}} J'aime</paper-icon-button>        
+        	<paper-icon-button>{{item.dislikes}} Je n'aime plus</paper-icon-button>
+    	</paper-card>
+
+	</template>
+
+	<script>
+
+
+		Polymer({
+
+			is: 'comment',
+			properties: {
+				commentaire : {
+					type: Object,
+					value: {}
+				},
+			}
+
+		});
+	</script>
+
+</dom-module>

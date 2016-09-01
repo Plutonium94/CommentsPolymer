@@ -1,0 +1,87 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+
+<dom-module id="my-comment">
+	<template>
+		<style>
+			:host  {
+				display: block;
+				margin-bottom: 5px;	
+
+			}
+
+			p {
+				color: #3322ff;
+			}
+
+			paper-card {
+				--paper-card-header-color: black;
+				--paper-card-header: { background-color: #dddddd;};
+				--paper-card-header-text : { font-size: 18px; };
+				--paper-card: { width: 100%;}
+				--paper-card-content: { background-color: rgb(246,247,247); font-size: 32px;}
+			}
+
+			.card-actions {
+				display: flex;
+				flex-flow: row nowrap;
+				justify-content: flex-start;
+			}
+
+			.datetimeDiv { font-size: 11px;}
+
+			#likeForm paper-button {
+				background-color: #47F3a7;
+			}
+
+			#dislikeForm paper-button {
+				background-color: #f78489;
+			}
+		</style>
+		<paper-card heading="{{commentaire.auteur}}">
+			<div class="card-content">{{commentaire.commentaire}} <div class="datetimeDiv">le {{commentaire.prettyDate}} à {{commentaire.prettyTime}}</div></div>
+			<div class="card-actions">
+				<form is="iron-form" id="likeForm" method="post" action="/like/{{commentaire.heure}}" on-click="submitLike" on-iron-form-response="augmenterLikes">
+		        	<paper-button raised>{{commentaire.likes}} J'aime</paper-button>        
+		        </form>
+		        <form is="iron-form" id="dislikeForm" method="post" action="/dislike/{{commentaire.heure}}" on-click="submitDislike" on-iron-form-response="augmenterDislikes">
+		        	<paper-button raised>[[commentaire.dislikes]] Je n'aime pas</paper-button>
+		        </form>
+		    </div>
+
+	</template>
+
+	<script>
+
+
+		Polymer({
+
+			is: 'my-comment',
+			properties: {
+				commentaire : {
+					type: Object,
+					value: {},					
+				},
+			}, 
+
+			submitLike : function() {
+				this.$.likeForm.submit();
+			},
+
+			submitDislike : function() {
+				this.$.dislikeForm.submit();
+			},
+
+			augmenterLikes: function(e) {
+				this.set('commentaire.likes',e.detail.response);
+			},
+
+			augmenterDislikes: function(e) {
+				this.set('commentaire.dislikes',e.detail.response);
+			}
+
+		});
+	</script>
+
+</dom-module>
